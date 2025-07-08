@@ -6,6 +6,10 @@
     <title>AI 교육혁신 연수: 공감 투표 앱</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    
+    <!-- Firebase SDK 추가 -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
     <style type="text/tailwindcss">
         @layer base {
             html {
@@ -169,6 +173,25 @@
     </footer>
     
     <script>
+        // Firebase 설정 (여기에 본인의 Firebase 설정을 넣으세요)
+        const firebaseConfig = {
+            // 여기에 Firebase 콘솔에서 복사한 설정을 붙여넣으세요
+            apiKey: "AIzaSyD-9tSrQWZ_oBvw2_Rm3d1QpOArsKG3BoU",
+            databaseURL: "https://feeling250709-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "feeling250709",
+            storageBucket: "feeling250709.firebasestorage.app",
+            messagingSenderId: "769595413321",
+            appId: "1:769595413321:web:393eda520264af17e80098",
+            measurementId: "G-CFRE1W5ZDR"
+        };
+
+        // Firebase 초기화
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        // 투표 데이터를 저장할 참조
+        const votesRef = database.ref('votes');
+
         // 모바일 메뉴 토글
         document.getElementById('mobile-menu-button').addEventListener('click', () => {
             document.getElementById('mobile-menu').classList.toggle('hidden');
@@ -203,40 +226,58 @@
             });
         });
 
-        // 공감 투표 기능
-        document.querySelectorAll('.vote-button').forEach(button => {
-            button.addEventListener('click', (e) => {
-                e.stopPropagation(); // 아코디언이 닫히는 것을 방지
-                
+        // 공감 투표 기능 (Firebase 연동)
+        document.querySelectorAll('.vote-button').forEach((button, index) => {
+            const voteId = `vote_${index}`;
+            
+            // Firebase에서 투표 데이터 실시간 감지
+            votesRef.child(voteId).on('value', (snapshot) => {
+                const voteData = snapshot.val() || { count: 0, voters: {} };
                 const countSpan = button.querySelector('.vote-count');
-                const heartOutline = button.querySelector('.heart-outline');
-                const heartSolid = button.querySelector('.heart-solid');
-                let currentCount = parseInt(countSpan.textContent, 10);
+                countSpan.textContent = voteData.count;
                 
-                if (button.classList.contains('voted')) {
-                    // 이미 투표한 경우: 투표 취소
-                    currentCount = Math.max(0, currentCount - 1);
-                    button.classList.remove('voted');
-                    button.classList.remove('text-red-500');
-                    button.classList.add('text-slate-400');
-                    
-                    // 하트 아이콘 실시간 변경
-                    heartOutline.style.display = 'inline-block';
-                    heartSolid.style.display = 'none';
-                } else {
-                    // 새로 투표하는 경우
-                    currentCount += 1;
+                // 현재 사용자의 투표 상태 확인 (간단한 세션 기반)
+                const sessionId = sessionStorage.getItem('sessionId') || Math.random().toString(36).substr(2, 9);
+                sessionStorage.setItem('sessionId', sessionId);
+                
+                if (voteData.voters && voteData.voters[sessionId]) {
                     button.classList.add('voted');
                     button.classList.remove('text-slate-400');
                     button.classList.add('text-red-500');
-                    
-                    // 하트 아이콘 실시간 변경
-                    heartOutline.style.display = 'none';
-                    heartSolid.style.display = 'inline-block';
+                    button.querySelector('.heart-outline').style.display = 'none';
+                    button.querySelector('.heart-solid').style.display = 'inline-block';
+                } else {
+                    button.classList.remove('voted');
+                    button.classList.remove('text-red-500');
+                    button.classList.add('text-slate-400');
+                    button.querySelector('.heart-outline').style.display = 'inline-block';
+                    button.querySelector('.heart-solid').style.display = 'none';
                 }
+            });
+            
+            button.addEventListener('click', (e) => {
+                e.stopPropagation(); // 아코디언이 닫히는 것을 방지
                 
-                // 숫자 실시간 업데이트
-                countSpan.textContent = currentCount;
+                const sessionId = sessionStorage.getItem('sessionId');
+                
+                // Firebase에서 현재 투표 데이터 가져오기
+                votesRef.child(voteId).once('value', (snapshot) => {
+                    const voteData = snapshot.val() || { count: 0, voters: {} };
+                    
+                    if (voteData.voters && voteData.voters[sessionId]) {
+                        // 이미 투표한 경우: 투표 취소
+                        voteData.count = Math.max(0, voteData.count - 1);
+                        delete voteData.voters[sessionId];
+                    } else {
+                        // 새로 투표하는 경우
+                        voteData.count += 1;
+                        if (!voteData.voters) voteData.voters = {};
+                        voteData.voters[sessionId] = true;
+                    }
+                    
+                    // Firebase에 업데이트된 데이터 저장
+                    votesRef.child(voteId).set(voteData);
+                });
                 
                 // 투표 애니메이션 효과
                 button.style.transform = 'scale(1.1)';
