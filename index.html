@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 교육혁신 연수: 공감 투표 앱</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <style type="text/tailwindcss">
+        @layer base {
+            html {
+                font-family: 'Pretendard', sans-serif;
+                color: #1e3a8a; /* 기본 군청색 */
+            }
+            .nav-link.active {
+                @apply text-teal-500 font-bold;
+            }
+            .vote-button.voted .heart-outline {
+                display: none;
+            }
+            .vote-button.voted .heart-solid {
+                display: inline-block;
+            }
+            .vote-button .heart-solid {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-50">
+
+    <nav id="navbar" class="bg-white/90 backdrop-blur-sm sticky top-0 z-50 shadow-md">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex justify-between items-center">
+                <a href="#" class="flex items-center space-x-2">
+                    <span class="text-2xl">🚀</span>
+                    <span class="text-xl font-bold text-teal-600">AI 교육혁신 연수</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-6 text-sm lg:text-base font-semibold text-slate-600">
+                    <a href="#core-values" class="nav-link hover:text-teal-500 transition-colors">📌 핵심 가치</a>
+                    <a href="#cec-activity" class="nav-link hover:text-teal-500 transition-colors">💡 C-E-C 활동</a>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+                    <svg class="w-6 h-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+            <a href="#core-values" class="block py-3 px-6 text-base font-semibold text-slate-600 hover:bg-teal-50">📌 핵심 가치</a>
+            <a href="#cec-activity" class="block py-3 px-6 text-base font-semibold text-slate-600 hover:bg-teal-50">💡 C-E-C 활동</a>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-6 py-12 md:py-20">
+
+        <header class="text-center mb-16 md:mb-24">
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-4 bg-gradient-to-r from-teal-500 to-sky-500 bg-clip-text text-transparent">2025 AI·디지털기반 교육혁신 선도교사연수</h1>
+            <p class="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">핵심가치와 Connect-Extend-Challenge 활동 예시</p>
+        </header>
+
+        <section id="core-values" class="mb-16 md:mb-24 scroll-mt-24">
+            <h2 class="text-3xl md:text-4xl font-bold text-navy-800 mb-10 text-center flex items-center justify-center gap-3">📌 교육 혁신의 핵심 가치</h2>
+            <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-orange-400 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                    <h3 class="text-2xl font-bold text-orange-600 mb-6 flex items-center gap-3">👤 인간 존엄성</h3>
+                    <ul class="space-y-4 text-slate-700">
+                        <li class="flex items-start"><span class="text-orange-500 mr-3 mt-1">✅</span><span>개인의 고유성 및 다양성 존중</span></li>
+                        <li class="flex items-start"><span class="text-orange-500 mr-3 mt-1">✅</span><span>학생의 행위 주체성(Agency) 지원</span></li>
+                        <li class="flex items-start"><span class="text-orange-500 mr-3 mt-1">✅</span><span>신체적, 정신적 웰빙 추구</span></li>
+                        <li class="flex items-start"><span class="text-orange-500 mr-3 mt-1">✅</span><span><b>형평성(Equity)과 포용(Inclusion)</b> 기반 기회 제공</span></li>
+                        <li class="flex items-start"><span class="text-orange-500 mr-3 mt-1">✅</span><span>강점 중심 피드백 및 정서적 안전감 구축</span></li>
+                    </ul>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-sky-400 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                    <h3 class="text-2xl font-bold text-sky-600 mb-6 flex items-center gap-3">📚 맞춤 학습</h3>
+                    <ul class="space-y-4 text-slate-700">
+                        <li class="flex items-start"><span class="text-sky-500 mr-3 mt-1">✅</span><span>AI 기반 개별화 콘텐츠 추천</span></li>
+                        <li class="flex items-start"><span class="text-sky-500 mr-3 mt-1">✅</span><span>유연한 학습 경로 제공</span></li>
+                        <li class="flex items-start"><span class="text-sky-500 mr-3 mt-1">✅</span><span>다중지능 및 학습 스타일 고려</span></li>
+                        <li class="flex items-start"><span class="text-sky-500 mr-3 mt-1">✅</span><span>'안다'에서 '할 수 있다'로, 역량 중심 교육</span></li>
+                        <li class="flex items-start"><span class="text-sky-500 mr-3 mt-1">✅</span><span>AI 분석 기반 수준별 과제 및 학습 선택권 보장</span></li>
+                    </ul>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-teal-400 hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+                    <h3 class="text-2xl font-bold text-teal-600 mb-6 flex items-center gap-3">👩‍🏫 교사 전문성</h3>
+                    <ul class="space-y-4 text-slate-700">
+                        <li class="flex items-start"><span class="text-teal-500 mr-3 mt-1">✅</span><span>데이터 기반 학습 진단 전문가</span></li>
+                        <li class="flex items-start"><span class="text-teal-500 mr-3 mt-1">✅</span><span>맞춤형 학습 경로 큐레이터</span></li>
+                        <li class="flex items-start"><span class="text-teal-500 mr-3 mt-1">✅</span><span>하이터치-하이테크 학습 촉진자</span></li>
+                        <li class="flex items-start"><span class="text-teal-500 mr-3 mt-1">✅</span><span>성장 기록자이자 피드백 전문가</span></li>
+                        <li class="flex items-start"><span class="text-teal-500 mr-3 mt-1">✅</span><span>디지털 역량 및 가치 중심 교육 전문가</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="cec-activity" class="scroll-mt-24">
+            <h2 class="text-3xl md:text-4xl font-bold text-navy-800 mb-10 text-center flex items-center justify-center gap-3">💡 Connect-Extend-Challenge 활동 예시</h2>
+            
+            <div class="max-w-4xl mx-auto space-y-4">
+                <div class="accordion-item bg-white rounded-lg shadow-sm border-l-4 border-sky-400">
+                    <button class="accordion-button w-full flex justify-between items-center text-left p-5 font-semibold text-xl text-sky-700 hover:bg-sky-50 rounded-r-lg transition-colors">
+                        <span class="flex items-center gap-3">🔗 Connect (연결하기)</span>
+                        <svg class="accordion-arrow w-6 h-6 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="accordion-content hidden p-6 pt-2">
+                        <ul class="space-y-3 text-slate-600">
+                            <li class="flex justify-between items-center py-1"><span class="w-4/5">AIDT 진단/분석 기능 ↔ 학기 초 사전평가 경험</span><button class="vote-button flex items-center gap-2 text-slate-400 hover:text-red-500 transition-colors p-2 rounded-full"><span class="heart-outline">♡</span><span class="heart-solid text-red-500">♥</span><span class="vote-count font-semibold text-sm">0</span></button></li>
+                            <li class="flex justify-between items-center py-1"><span class="w-4/5">맞춤 학습 개념 ↔ 개별 학습 속도를 고려했던 이전 수업 경험</span><button class="vote-button flex items-center gap-2 text-slate-400 hover:text-red-500 transition-colors p-2 rounded-full"><span class="heart-outline">♡</span><span class="heart-solid text-red-500">♥</span><span class="vote-count font-semibold text-sm">0</span></button></li>
+                            <li class="flex justify-between items-center py-1"><span class="w-4/5">학생 고유성 존중 철학 ↔ 평소 중요하게 생각하던 교육 가치</span><button class="vote-button flex items-center gap-2 text-slate-400 hover:text-red-500 transition-colors p-2 rounded-full"><span class="heart-outline">♡</span><span class="heart-solid text-red-500">♥</span><span class="vote-count font-semibold text-sm">0</span></button></li>
+                            <li class="flex justify-between items-center py-1"><span class="w-4/5">AI 콘텐츠 추천 ↔ 수작업으로 자료를 모으던 방식의 확장</span><button class="vote-button flex items-center gap-2 text-slate-400 hover:text-red-500 transition-colors p-2 rounded-full"><span class="heart-outline">♡</span><span class="heart-solid text-red-500">♥</span><span class="vote-count font-semibold text-sm">0</span></button></li>
+                            <li class="flex justify-between items-center py-1"><span class="w-4/5">교사 전문성 강화 필요성 ↔ 디지털 역량 강화를 위한 개인적 노력</span><button class="vote-button flex items-center gap-2 text-slate-400 hover:text-red-500 transition-colors p-2 rounded-full"><span class="heart-outline">♡</span><span class="heart-solid text-red-500">♥</span><span class="vote-count font-semibold text-sm">0</span></button></li>
+                            <li class="flex justify-between items-center py-1"><span class="w-4/5">AI 자동 피드백 ↔ 평가 후 피드백 지연에 대한 고민</span><button class="vote-button flex items-center gap-2 text-slate-400 hover:text-red-500 transition-colors p-2 rounded-full"><span class="heart-outline">♡</span><span class="heart-solid text-red-500">♥</span><span class="vote-count font-semibold text-sm">0</span></button></li>
+                            <li class="flex justify-between items-center py-1"><span class="w-4/5">하이터치/하이테크 균형 ↔ 기술 활용과 관계 형성의 조화를 시도했던 경험</span><button class="vote-button flex items-center gap-2 text-slate-400 hover:text-red-500 transition-colors p-2 rounded-full"><span class="heart-outline">♡</span><span class="heart-solid text-red-500">♥</span><span class="vote-count font-semibold text-sm">0</span></button></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="accordion-item bg-white rounded-lg shadow-sm border-l-4 border-teal-400">
+                    <button class="accordion-button w-full flex justify-between items-center text-left p-5 font-semibold text-xl text-teal-700 hover:bg-teal-50 rounded-r-lg transition-colors">
+                        <span class="flex items-center gap-3">🌱 Extend (확장하기)</span>
+                        <svg class="accordion-arrow w-6 h-6 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="accordion-content hidden p-6 pt-2">
+                         <ul class="space-y-3 text-slate-600">
+                            <li class="flex justify-between items-center py-1"><span class="w-4/5">AI 피드백으로 확보된 시간 → 학생 상담 및 정서적 지지에 활용</span><button class="vote-button flex items-center gap-2 text-slate-400 hover:text-red-500 transition-colors p-2 rounded-full"><span class="heart-outline">♡</span><span class="heart-solid text-red-500">♥</span><span class="vote-count font-semibold text-sm">0</span></button></li>
+                            <li class="flex justify-between items-center py-1"><span class="w-4/5">반복 학습은 AI에게, 교사는 심층 토론 및 문제 해결 활동에 집중</span><button class="vote-button flex items-center gap-2 text-slate-400 hover:text-red-500 transition-colors p-2 rounded-full"><span class="heart-outline">♡</span><span class="heart-solid text-red-500">♥</span><span class="vote-count font-semibold text-sm">0</span></button></li>
+                            <li class="flex justify-between items-center py-1"><span class="w-4/5">지식 전달자 → AI와 협력하여 학생의 자기주도 학습 설계를 돕는 조력자</span><button class="vote-button flex items-center gap-2 text-slate-400 hover:text-red-500 transition-colors p-2 rounded-full"><span class="heart-outline">♡</span><span class="heart-solid text-red-500">♥</span><span class="vote-count font-semibold text-sm">0</span></button></li>
+                            <li class="flex justify-between items-center py-1"><span class="w-4/5">학습 데이터 분석 → 역량 중심 교육과정 설계 전문가로 성장</span><button class="vote-button flex items-center gap-2 text-slate-400 hover:text-red-500 transition-colors p-2 rounded-full"><span class="heart-outline">♡</span><span class="heart-solid text-red-500">♥</span><span class="vote-count font-semibold text-sm">0</span></button></li>
+                            <li class="flex justify-between items-center py-1"><span class="w-4/5">교육 철학 확장 → 개별 학생의 특성과 흥미에 맞는 유연한 학습 환경 설계</span><button class="vote-button flex items-center gap-2 text-slate-400 hover:text-red-500 transition-colors p-2 rounded-full"><span class="heart-outline">♡</span><span class="heart-solid text-red-500">♥</span><span class="vote-count font-semibold text-sm">0</span></button></li>
+                            <li class="flex justify-between items-center py-1"><span class="w-4/5">AI 자료 생성으로 수업 준비 부담 감소 → 학생 흥미 중심의 협력/프로젝트 활동 구상</span><button class="vote-button flex items-center gap-2 text-slate-400 hover:text-red-500 transition-colors p-2 rounded-full"><span class="heart-outline">♡</span><span class="heart-solid text-red-500">♥</span><span class="vote-count font-semibold text-sm">0</span></button></li>
+                            <li class="flex justify-between items-center py-1"><span class="w-4/5">학습 이력 대시보드 활용 → 학생과 함께 성장 스토리를 만드는 기록자</span><button class="vote-button flex items-center gap-2 text-slate-400 hover:text-red-500 transition-colors p-2 rounded-full"><span class="heart-outline">♡</span><span class="heart-solid text-red-500">♥</span><span class="vote-count font-semibold text-sm">0</span></button></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="accordion-item bg-white rounded-lg shadow-sm border-l-4 border-orange-400">
+                    <button class="accordion-button w-full flex justify-between items-center text-left p-5 font-semibold text-xl text-orange-700 hover:bg-orange-50 rounded-r-lg transition-colors">
+                        <span class="flex items-center gap-3">🤔 Challenge (도전하기)</span>
+                        <svg class="accordion-arrow w-6 h-6 transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </button>
+                    <div class="accordion-content hidden p-6 pt-2">
+                         <ul class="space-y-3 text-slate-600">
+                            <li class="flex justify-between items-center py-1"><span class="w-4/5">물리적 인프라 문제: 교실 인터넷 환경, 학생 디지털 기기 접근성</span><button class="vote-button flex items-center gap-2 text-slate-400 hover:text-red-500 transition-colors p-2 rounded-full"><span class="heart-outline">♡</span><span class="heart-solid text-red-500">♥</span><span class="vote-count font-semibold text-sm">0</span></button></li>
+                            <li class="flex justify-between items-center py-1"><span class="w-4/5">교육적 판단의 균형: AI의 추천과 교사의 판단 사이의 조화</span><button class="vote-button flex items-center gap-2 text-slate-400 hover:text-red-500 transition-colors p-2 rounded-full"><span class="heart-outline">♡</span><span class="heart-solid text-red-500">♥</span><span class="vote-count font-semibold text-sm">0</span></button></li>
+                            <li class="flex justify-between items-center py-1"><span class="w-4/5">제도적 충돌: 새로운 디지털 도구와 기존 교육/평가 방식의 충돌</span><button class="vote-button flex items-center gap-2 text-slate-400 hover:text-red-500 transition-colors p-2 rounded-full"><span class="heart-outline">♡</span><span class="heart-solid text-red-500">♥</span><span class="vote-count font-semibold text-sm">0</span></button></li>
+                            <li class="flex justify-between items-center py-1"><span class="w-4/5">교수법의 심화: 단순 도구 활용을 넘어 디지털 페다고지 전문성 확장 방안</span><button class="vote-button flex items-center gap-2 text-slate-400 hover:text-red-500 transition-colors p-2 rounded-full"><span class="heart-outline">♡</span><span class="heart-solid text-red-500">♥</span><span class="vote-count font-semibold text-sm">0</span></button></li>
+                            <li class="flex justify-between items-center py-1"><span class="w-4/5">윤리적 문제: 개인정보 보호, 기술적 냉정함 등 한계 극복</span><button class="vote-button flex items-center gap-2 text-slate-400 hover:text-red-500 transition-colors p-2 rounded-full"><span class="heart-outline">♡</span><span class="heart-solid text-red-500">♥</span><span class="vote-count font-semibold text-sm">0</span></button></li>
+                            <li class="flex justify-between items-center py-1"><span class="w-4/5">데이터 해독 역량: 방대한 학습 데이터를 해석하고 교육적 통찰을 도출하는 역량</span><button class="vote-button flex items-center gap-2 text-slate-400 hover:text-red-500 transition-colors p-2 rounded-full"><span class="heart-outline">♡</span><span class="heart-solid text-red-500">♥</span><span class="vote-count font-semibold text-sm">0</span></button></li>
+                            <li class="flex justify-between items-center py-1"><span class="w-4/5">디지털 격차 해소: 소외되는 학생 없이 형평성과 포용의 가치를 실현하는 방안</span><button class="vote-button flex items-center gap-2 text-slate-400 hover:text-red-500 transition-colors p-2 rounded-full"><span class="heart-outline">♡</span><span class="heart-solid text-red-500">♥</span><span class="vote-count font-semibold text-sm">0</span></button></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-800 text-slate-300 mt-16 md:mt-24">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <p>&copy; 2025 교육 콘텐츠 시각화 전문가. All Rights Reserved.</p>
+            <p class="text-sm mt-2 text-slate-400">본 페이지는 교육적 목적으로 제작되었습니다.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // 모바일 메뉴 토글
+        document.getElementById('mobile-menu-button').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // 아코디언 기능
+        document.querySelectorAll('.accordion-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const arrow = button.querySelector('.accordion-arrow');
+                content.classList.toggle('hidden');
+                arrow.classList.toggle('rotate-180');
+            });
+        });
+        
+        // 스크롤에 따른 활성 네비게이션 링크 표시
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                if (pageYOffset >= section.offsetTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // 공감 투표 기능
+        document.querySelectorAll('.vote-button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.stopPropagation(); // 아코디언이 닫히는 것을 방지
+                
+                const countSpan = button.querySelector('.vote-count');
+                let currentCount = parseInt(countSpan.textContent, 10);
+                
+                if (button.classList.contains('voted')) {
+                    // 이미 투표한 경우: 투표 취소
+                    currentCount -= 1;
+                    button.classList.remove('voted');
+                    button.classList.add('text-slate-400');
+                    button.classList.remove('text-red-500');
+                } else {
+                    // 새로 투표하는 경우
+                    currentCount += 1;
+                    button.classList.add('voted');
+                    button.classList.remove('text-slate-400');
+                    button.classList.add('text-red-500');
+                }
+                
+                countSpan.textContent = currentCount;
+            });
+        });
+    </script>
+</body>
+</html>
